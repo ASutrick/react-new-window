@@ -23,7 +23,6 @@ class NewWindow extends React.PureComponent {
     onBlock: null,
     onOpen: null,
     onUnload: null,
-    center: 'parent',
     copyStyles: true,
     closeOnUnmount: true
   }
@@ -64,41 +63,7 @@ class NewWindow extends React.PureComponent {
    * Create the new window when NewWindow component mount.
    */
   openChild() {
-    const { url, title, name, features, onBlock, onOpen, center } = this.props
-
-    // Prepare position of the new window to be centered against the 'parent' window or 'screen'.
-    if (
-      typeof center === 'string' &&
-      (features.width === undefined || features.height === undefined)
-    ) {
-      console.warn(
-        'width and height window features must be present when a center prop is provided'
-      )
-    } else if (center === 'parent') {
-      features.left =
-        window.top.outerWidth / 2 + window.top.screenX - features.width / 2
-      features.top =
-        window.top.outerHeight / 2 + window.top.screenY - features.height / 2
-    } else if (center === 'screen') {
-      const screenLeft =
-        window.screenLeft !== undefined ? window.screenLeft : window.screen.left
-      const screenTop =
-        window.screenTop !== undefined ? window.screenTop : window.screen.top
-
-      const width = window.innerWidth
-        ? window.innerWidth
-        : document.documentElement.clientWidth
-          ? document.documentElement.clientWidth
-          : window.screen.width
-      const height = window.innerHeight
-        ? window.innerHeight
-        : document.documentElement.clientHeight
-          ? document.documentElement.clientHeight
-          : window.screen.height
-
-      features.left = width / 2 - features.width / 2 + screenLeft
-      features.top = height / 2 - features.height / 2 + screenTop
-    }
+    const { url, title, name, features, onBlock, onOpen } = this.props
 
     // Open a new window.
     this.window = window.open(url, name, toWindowFeatures(features))
@@ -204,7 +169,6 @@ NewWindow.propTypes = {
   onUnload: PropTypes.func,
   onBlock: PropTypes.func,
   onOpen: PropTypes.func,
-  center: PropTypes.oneOf(['parent', 'screen']),
   copyStyles: PropTypes.bool,
   closeOnUnmount: PropTypes.bool
 }

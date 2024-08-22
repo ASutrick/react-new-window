@@ -63,11 +63,6 @@ declare module 'react-new-window' {
     onOpen?: OpenEventHandler | null
 
     /**
-     * Indicate how to center the new window.
-     */
-    center?: 'parent' | 'screen'
-
-    /**
      * If specified, copy styles from parent window's document.
      */
     copyStyles?: boolean
