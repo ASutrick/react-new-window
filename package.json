@@ -1,7 +1,7 @@
 {
   "name": "@asutrick/react-new-window",
   "description": "Pop a new window in React, using window.open API",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "keywords": [
     "react",
     "window",
